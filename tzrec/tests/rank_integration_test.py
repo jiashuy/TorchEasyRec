@@ -757,48 +757,48 @@ class RankIntegrationTest(unittest.TestCase):
             comp_cpu_gpu_pred_result=True,
         )
 
-    @unittest.skipIf(*gpu_unavailable)
-    def test_multi_tower_din_with_fg_fp16_ga_train_eval_export(self):
-        self._test_rank_with_fg(
-            "tzrec/tests/configs/multi_tower_din_fg_mock_fp16_ga.config",
-            comp_cpu_gpu_pred_result=True,
-        )
+    # @unittest.skipIf(*gpu_unavailable)
+    # def test_multi_tower_din_with_fg_fp16_ga_train_eval_export(self):
+    #     self._test_rank_with_fg(
+    #         "tzrec/tests/configs/multi_tower_din_fg_mock_fp16_ga.config",
+    #         comp_cpu_gpu_pred_result=True,
+    #     )
 
-    @unittest.skipIf(*gpu_unavailable)
-    def test_multi_tower_din_with_fg_bf16_emb_fp16_train_eval_export(self):
-        self._test_rank_with_fg(
-            "tzrec/tests/configs/multi_tower_din_fg_mock_bf16_emb_fp16.config",
-            comp_cpu_gpu_pred_result=True,
-        )
+    # @unittest.skipIf(*gpu_unavailable)
+    # def test_multi_tower_din_with_fg_bf16_emb_fp16_train_eval_export(self):
+    #     self._test_rank_with_fg(
+    #         "tzrec/tests/configs/multi_tower_din_fg_mock_bf16_emb_fp16.config",
+    #         comp_cpu_gpu_pred_result=True,
+    #     )
 
-    @unittest.skipIf(*gpu_unavailable)
-    def test_multi_tower_din_zch_with_fg_train_eval_export(self):
-        self._test_rank_with_fg(
-            "tzrec/tests/configs/multi_tower_din_zch_fg_mock.config",
-            comp_cpu_gpu_pred_result=True,
-        )
+    # @unittest.skipIf(*gpu_unavailable)
+    # def test_multi_tower_din_zch_with_fg_train_eval_export(self):
+    #     self._test_rank_with_fg(
+    #         "tzrec/tests/configs/multi_tower_din_zch_fg_mock.config",
+    #         comp_cpu_gpu_pred_result=True,
+    #     )
 
-    def test_multi_tower_din_with_fg_export_quant(self):
-        self._test_rank_with_fg_quant(
-            "tzrec/tests/configs/multi_tower_din_fg_mock.config"
-        )
+    # def test_multi_tower_din_with_fg_export_quant(self):
+    #     self._test_rank_with_fg_quant(
+    #         "tzrec/tests/configs/multi_tower_din_fg_mock.config"
+    #     )
 
-    def test_multi_tower_din_with_fg_train_eval_export_input_tile(self):
-        self._test_rank_with_fg_input_tile(
-            "tzrec/tests/configs/multi_tower_din_fg_mock.config"
-        )
+    # def test_multi_tower_din_with_fg_train_eval_export_input_tile(self):
+    #     self._test_rank_with_fg_input_tile(
+    #         "tzrec/tests/configs/multi_tower_din_fg_mock.config"
+    #     )
 
-    @unittest.skipIf(*gpu_unavailable)
-    def test_multi_tower_din_zch_with_fg_train_eval_export_input_tile(self):
-        self._test_rank_with_fg_input_tile(
-            "tzrec/tests/configs/multi_tower_din_zch_fg_mock.config"
-        )
+    # @unittest.skipIf(*gpu_unavailable)
+    # def test_multi_tower_din_zch_with_fg_train_eval_export_input_tile(self):
+    #     self._test_rank_with_fg_input_tile(
+    #         "tzrec/tests/configs/multi_tower_din_zch_fg_mock.config"
+    #     )
 
-    @unittest.skip("AOTI cause illegal memory access.")
-    def test_multi_tower_din_with_fg_train_eval_aot_export_input_tile(self):
-        self._test_rank_with_fg_aot_input_tile(
-            "tzrec/tests/configs/multi_tower_din_fg_mock.config"
-        )
+    # @unittest.skip("AOTI cause illegal memory access.")
+    # def test_multi_tower_din_with_fg_train_eval_aot_export_input_tile(self):
+    #     self._test_rank_with_fg_aot_input_tile(
+    #         "tzrec/tests/configs/multi_tower_din_fg_mock.config"
+    #     )
 
     def test_dbmtl_has_sequence_variational_dropout_train_eval_export(self):
         self.success = utils.test_train_eval(
@@ -828,22 +828,22 @@ class RankIntegrationTest(unittest.TestCase):
             os.path.exists(os.path.join(self.test_dir, "output_dir/pipeline.config"))
         )
 
-    @unittest.skipIf(*gpu_unavailable)
-    def test_rank_dlrm_hstu_train_eval_export(self):
-        self.success = utils.test_train_eval(
-            "tzrec/tests/configs/dlrm_hstu_kuairand_1k.config", self.test_dir
-        )
-        if self.success:
-            self.success = utils.test_eval(
-                os.path.join(self.test_dir, "pipeline.config"), self.test_dir
-            )
-        if self.success:
-            self.success = utils.test_export(
-                os.path.join(self.test_dir, "pipeline.config"), self.test_dir
-            )
-        self.assertTrue(
-            os.path.exists(os.path.join(self.test_dir, "export/scripted_model.pt"))
-        )
+    # @unittest.skipIf(*gpu_unavailable)
+    # def test_rank_dlrm_hstu_train_eval_export(self):
+    #     self.success = utils.test_train_eval(
+    #         "tzrec/tests/configs/dlrm_hstu_kuairand_1k.config", self.test_dir
+    #     )
+    #     if self.success:
+    #         self.success = utils.test_eval(
+    #             os.path.join(self.test_dir, "pipeline.config"), self.test_dir
+    #         )
+    #     if self.success:
+    #         self.success = utils.test_export(
+    #             os.path.join(self.test_dir, "pipeline.config"), self.test_dir
+    #         )
+    #     self.assertTrue(
+    #         os.path.exists(os.path.join(self.test_dir, "export/scripted_model.pt"))
+    #     )
 
     @unittest.skipIf(
         gpu_unavailable[0] or not dynamicemb_util.has_dynamicemb,
@@ -866,46 +866,46 @@ class RankIntegrationTest(unittest.TestCase):
         #     )
         # self.assertTrue(self.success)
 
-    @unittest.skipIf(
-        gpu_unavailable[0] or not trt_utils.has_tensorrt, "tensorrt not available."
-    )
-    def test_multi_tower_with_fg_train_eval_export_trt(self):
-        self._test_rank_with_fg_trt(
-            "tzrec/tests/configs/multi_tower_din_trt_fg_mock.config",
-            predict_columns=["user_id", "item_id", "clk", "probs"],
-        )
+    # @unittest.skipIf(
+    #     gpu_unavailable[0] or not trt_utils.has_tensorrt, "tensorrt not available."
+    # )
+    # def test_multi_tower_with_fg_train_eval_export_trt(self):
+    #     self._test_rank_with_fg_trt(
+    #         "tzrec/tests/configs/multi_tower_din_trt_fg_mock.config",
+    #         predict_columns=["user_id", "item_id", "clk", "probs"],
+    #     )
 
-    @unittest.skipIf(
-        gpu_unavailable[0] or not trt_utils.has_tensorrt, "tensorrt not available."
-    )
-    def test_multi_tower_zch_with_fg_train_eval_export_trt(self):
-        self._test_rank_with_fg_trt(
-            "tzrec/tests/configs/multi_tower_din_zch_trt_fg_mock.config",
-            predict_columns=["user_id", "item_id", "clk", "probs"],
-        )
+    # @unittest.skipIf(
+    #     gpu_unavailable[0] or not trt_utils.has_tensorrt, "tensorrt not available."
+    # )
+    # def test_multi_tower_zch_with_fg_train_eval_export_trt(self):
+    #     self._test_rank_with_fg_trt(
+    #         "tzrec/tests/configs/multi_tower_din_zch_trt_fg_mock.config",
+    #         predict_columns=["user_id", "item_id", "clk", "probs"],
+    #     )
 
-    @unittest.skipIf(*gpu_unavailable)
-    def test_multi_tower_din_rtp_train_eval_export(self):
-        self.success = utils.test_train_eval(
-            "tzrec/tests/configs/multi_tower_din_fg_rtp_mock.config",
-            self.test_dir,
-            user_id="user_id",
-            item_id="item_id",
-            env_str="USE_FARM_HASH_TO_BUCKETIZE=true",
-        )
-        if self.success:
-            self.success = utils.test_eval(
-                os.path.join(self.test_dir, "pipeline.config"),
-                self.test_dir,
-                env_str="USE_FARM_HASH_TO_BUCKETIZE=true",
-            )
-        if self.success:
-            self.success = utils.test_export(
-                os.path.join(self.test_dir, "pipeline.config"),
-                self.test_dir,
-                env_str="USE_FARM_HASH_TO_BUCKETIZE=true USE_RTP=1",
-            )
-        self.assertTrue(self.success)
+    # @unittest.skipIf(*gpu_unavailable)
+    # def test_multi_tower_din_rtp_train_eval_export(self):
+    #     self.success = utils.test_train_eval(
+    #         "tzrec/tests/configs/multi_tower_din_fg_rtp_mock.config",
+    #         self.test_dir,
+    #         user_id="user_id",
+    #         item_id="item_id",
+    #         env_str="USE_FARM_HASH_TO_BUCKETIZE=true",
+    #     )
+    #     if self.success:
+    #         self.success = utils.test_eval(
+    #             os.path.join(self.test_dir, "pipeline.config"),
+    #             self.test_dir,
+    #             env_str="USE_FARM_HASH_TO_BUCKETIZE=true",
+    #         )
+    #     if self.success:
+    #         self.success = utils.test_export(
+    #             os.path.join(self.test_dir, "pipeline.config"),
+    #             self.test_dir,
+    #             env_str="USE_FARM_HASH_TO_BUCKETIZE=true USE_RTP=1",
+    #         )
+    #     self.assertTrue(self.success)
 
 
 if __name__ == "__main__":

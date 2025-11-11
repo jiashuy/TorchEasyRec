@@ -1,0 +1,1 @@
+ /usr/local/cuda-12.6/bin/nvcc ./tzrec/tests/test_dynamicemb_initializer/test_initializer.cu -arch=sm_90 
